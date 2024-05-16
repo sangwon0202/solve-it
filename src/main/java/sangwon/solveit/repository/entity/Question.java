@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import sangwon.solveit.type.QuestionType;
 
+import java.util.List;
+
 
 @Entity
 @Getter
@@ -22,13 +24,17 @@ public class Question {
     @Enumerated(EnumType.STRING)
     private QuestionType questionType;
     private String answer;
+    @OneToMany(mappedBy = "question", fetch = FetchType.LAZY,
+            cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private List<Choice> choices;
 
     @Builder
-    public Question(Quiz quiz, Long number, String content, QuestionType questionType, String answer) {
-        this.quiz = quiz;
+    public Question(Long number, String content, QuestionType questionType,
+                    String answer, List<Choice> choices) {
         this.number = number;
         this.content = content;
         this.questionType = questionType;
         this.answer = answer;
+        this.choices = choices;
     }
 }

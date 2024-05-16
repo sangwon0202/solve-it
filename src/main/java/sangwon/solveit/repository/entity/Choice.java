@@ -19,8 +19,7 @@ public class Choice {
     private String content;
 
     @Builder
-    public Choice(Question question, Long number, String content) {
-        this.question = question;
+    public Choice(Long number, String content) {
         this.number = number;
         this.content = content;
     }
