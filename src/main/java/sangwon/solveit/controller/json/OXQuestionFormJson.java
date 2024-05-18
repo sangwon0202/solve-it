@@ -1,4 +1,4 @@
-package sangwon.solveit.controller.form;
+package sangwon.solveit.controller.json;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import lombok.Getter;
@@ -7,6 +7,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @JsonTypeName("OX")
-public class OXQuestionForm extends QuestionForm {
-    Character answer;
+public class OXQuestionFormJson extends QuestionFormJson {
+    Boolean answer;
 }

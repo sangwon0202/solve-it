@@ -14,7 +14,7 @@ public class ErrorResponse {
     private String errorCode;
     private String message;
 
-    public static ResponseEntity<ErrorResponse> toResponseEntity(ClientException e) {
+    public static ResponseEntity<ErrorResponse> toResponseEntity(CustomException e) {
         return ResponseEntity
                 .status(e.getHttpStatus())
                 .body(ErrorResponse.builder()

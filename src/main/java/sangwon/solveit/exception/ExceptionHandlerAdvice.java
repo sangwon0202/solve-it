@@ -12,8 +12,8 @@ import sangwon.solveit.exception.client.InvalidRequestJsonException;
 @RestControllerAdvice
 @Slf4j
 public class ExceptionHandlerAdvice {
-    @ExceptionHandler(ClientException.class)
-    public ResponseEntity<ErrorResponse> handleClientException(ClientException e) {
+    @ExceptionHandler(CustomException.class)
+    public ResponseEntity<ErrorResponse> handleClientException(CustomException e) {
         return ErrorResponse.toResponseEntity(e);
     }
 
@@ -22,18 +22,14 @@ public class ExceptionHandlerAdvice {
         return handleClientException(new InvalidRequestJsonException());
     }
 
-
     @ExceptionHandler(InvalidTypeIdException.class)
     public ResponseEntity<ErrorResponse> handleInvalidTypeIdException(InvalidTypeIdException e) {
-        throw new InvalidRequestJsonException();
+        return ErrorResponse.toResponseEntity(new InvalidRequestJsonException());
     }
-
-
 
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<ErrorResponse> handleServerException(Exception e) {
         e.printStackTrace();
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(null);
+        return ErrorResponse.toResponseEntity(new ServerException());
     }
 }
